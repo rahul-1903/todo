@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar class="end">
+    <ion-title>
+      Todo App
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="todoForm">
+    <ion-chip class="expand">
+      <ion-input placeholder="Enter Todo" type="text" formControlName="todo"></ion-input>
+      <ion-chip-button (click)="onSubmit()">
+        <ion-icon name="add-circle"></ion-icon>
+      </ion-chip-button>
+    </ion-chip>
+  </form>
+
+  <div *ngFor="let task of todoList; let i=index;">
+      <ion-item *ngIf="task">
+          <ion-label>{{task}}</ion-label>
+          <ion-chip-button (click)="removeTodo(i)">
+            <ion-icon name="close-circle"></ion-icon>
+          </ion-chip-button>
+      </ion-item>
+  </div> 
+
+  <div *ngIf="todoForm.valid">
+      <ion-item text-wrap>
+          <ion-label><h1>{{todoForm.value.todo}}</h1></ion-label>
+          <ion-chip-button>
+            <ion-icon name="close-circle"></ion-icon>
+          </ion-chip-button>
+      </ion-item>
+  </div>
+      
+</ion-content>
