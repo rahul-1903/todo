@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 // import { NativeStorage } from '@ionic-native/native-storage';
 // import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-home',
@@ -13,16 +14,19 @@ export class HomePage {
   todoList: string[] = ['Eat an apple', 'Go For a walk'];
   todoForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,) {
+  constructor(private formBuilder: FormBuilder,
+    private storage: Storage) {
+    
     this.todoForm = this.formBuilder.group({
       todo: ['', Validators.required],
     });
 
-    // this.nativeStorage.setItem('todoList', this.todoList)
-    //   .then(
-    //     () => console.log('Stored item'),
-    //     error => console.log(error)
-    //   );
+    storage.get('todoList')
+      .then((todoList) => {
+        console.log('Your data', todoList);
+        this.todoList = todoList;
+      })
+
   }
 
   onSubmit() {
@@ -34,12 +38,14 @@ export class HomePage {
     console.log('task added');
     this.todoList.push(todo);
 
+    this.storage.set('todoList', this.todoList).then((data)=>console.log('data added', data));
   }
 
   removeTodo(index) {
     console.log('task removed');
-    delete this.todoList[index];
-
+    // delete this.todoList[index];
+    this.todoList.splice(index,1);
+    this.storage.set('todoList', this.todoList).then((data)=>console.log('data removed', data));;
   }
 
 }
