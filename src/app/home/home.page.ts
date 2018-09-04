@@ -37,17 +37,25 @@ export class HomePage {
   }
 
   addTodo(todo) {
-    console.log('task added');
-    this.todoList.push(todo);
+    if (todo) {
+      console.log('task added');
+      this.todoList.push(todo);
 
-    this.storage.set('todoList', this.todoList).then((data)=>console.log('data added', data));
-    
-    // adding toast
-    this.toastCtrl.create({
-      message: 'Task added to the list',
-      duration: 1000,
-    }).then((toast) => toast.present());
-
+      this.storage.set('todoList', this.todoList).then((data)=>console.log('data added', data));
+      
+      // adding toast
+      this.toastCtrl.create({
+        message: 'Task added to the list',
+        duration: 1000,
+      }).then((toast) => toast.present());
+    }
+    else {
+      console.log('task cannot be empty');
+      this.toastCtrl.create({
+        message: 'Task input is empty',
+        duration: 2000,
+      }).then((toast) => toast.present());
+    }
   }
 
   removeTodo(index) {
