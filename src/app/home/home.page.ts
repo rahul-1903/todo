@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-// import { NativeStorage } from '@ionic-native/native-storage';
-// import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage';
 import { Storage } from '@ionic/storage';
 
 @Component({
@@ -23,8 +21,10 @@ export class HomePage {
 
     storage.get('todoList')
       .then((todoList) => {
-        console.log('Your data', todoList);
-        this.todoList = todoList;
+        if (todoList) {
+          console.log('Your data', todoList);
+          this.todoList = todoList;
+        }
       })
 
   }
@@ -43,7 +43,6 @@ export class HomePage {
 
   removeTodo(index) {
     console.log('task removed');
-    // delete this.todoList[index];
     this.todoList.splice(index,1);
     this.storage.set('todoList', this.todoList).then((data)=>console.log('data removed', data));;
   }
