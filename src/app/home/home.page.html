@@ -19,7 +19,7 @@
 
   <div *ngFor="let task of todoList; let i=index;">
       <ion-item *ngIf="task">
-          <ion-label>{{task}}</ion-label>
+          <ion-label>{{i+1}}. {{task}}</ion-label>
           <ion-chip-button (click)="removeTodo(i)">
             <ion-icon name="close-circle"></ion-icon>
           </ion-chip-button>
