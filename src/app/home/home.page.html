@@ -16,6 +16,13 @@
       </ion-chip-button>
     </ion-chip>
   </form>
+  
+  <div>
+    <ion-button (click)="allClear()" color="medium" fill="outline" expand="full">
+      <ion-icon slot="start" name="star"></ion-icon>
+      Clear All Tasks
+    </ion-button>
+  </div>
 
   <div *ngFor="let task of todoList; let i=index;">
       <ion-item *ngIf="task">
@@ -34,5 +41,7 @@
           </ion-chip-button>
       </ion-item>
   </div>
+
+  
       
 </ion-content>

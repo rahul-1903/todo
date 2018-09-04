@@ -69,4 +69,9 @@ export class HomePage {
     }).then((toast) => toast.present());
   }
 
+  allClear() {
+   this.storage.remove('todoList'); 
+   this.todoList = [];
+  }
+
 }
