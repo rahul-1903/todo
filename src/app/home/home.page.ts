@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Storage } from '@ionic/storage';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,8 @@ export class HomePage {
   todoForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-    private storage: Storage) {
+    private storage: Storage,
+    private toastCtrl: ToastController) {
     
     this.todoForm = this.formBuilder.group({
       todo: ['', Validators.required],
@@ -39,12 +41,24 @@ export class HomePage {
     this.todoList.push(todo);
 
     this.storage.set('todoList', this.todoList).then((data)=>console.log('data added', data));
+    
+    // adding toast
+    this.toastCtrl.create({
+      message: 'Task added to the list',
+      duration: 1000,
+    }).then((toast) => toast.present());
+
   }
 
   removeTodo(index) {
     console.log('task removed');
     this.todoList.splice(index,1);
     this.storage.set('todoList', this.todoList).then((data)=>console.log('data removed', data));;
+    
+    this.toastCtrl.create({
+      message: 'Task deleted from the list',
+      duration: 1000,
+    }).then((toast) => toast.present());
   }
 
 }

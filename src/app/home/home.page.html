@@ -10,7 +10,7 @@
 
   <form [formGroup]="todoForm">
     <ion-chip class="expand">
-      <ion-input placeholder="Enter Todo" type="text" formControlName="todo"></ion-input>
+      <ion-input placeholder="  Enter Todo" type="text" formControlName="todo"></ion-input>
       <ion-chip-button (click)="onSubmit()">
         <ion-icon name="add-circle"></ion-icon>
       </ion-chip-button>
@@ -28,7 +28,7 @@
 
   <div *ngIf="todoForm.valid">
       <ion-item text-wrap>
-          <ion-label><h1>{{todoForm.value.todo}}</h1></ion-label>
+          <ion-label><h1>{{todoList.length+1}}. {{todoForm.value.todo}}</h1></ion-label>
           <ion-chip-button>
             <ion-icon name="close-circle"></ion-icon>
           </ion-chip-button>
