@@ -24,7 +24,7 @@ export class HomePage {
     storage.get('todoList')
       .then((todoList) => {
         if (todoList) {
-          console.log('Your data', todoList);
+          // console.log('Your data', todoList);
           this.todoList = todoList;
         }
       })
@@ -38,7 +38,7 @@ export class HomePage {
 
   addTodo(todo) {
     if (todo) {
-      console.log('task added');
+      // console.log('task added');
       this.todoList.push(todo);
 
       this.storage.set('todoList', this.todoList).then((data)=>console.log('data added', data));
@@ -50,7 +50,7 @@ export class HomePage {
       }).then((toast) => toast.present());
     }
     else {
-      console.log('task cannot be empty');
+      // console.log('task cannot be empty');
       this.toastCtrl.create({
         message: 'Task input is empty',
         duration: 2000,
